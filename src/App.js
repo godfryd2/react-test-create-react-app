@@ -10,7 +10,8 @@ class App extends React.Component {
     super();
 
     this.state = {
-      filteredUsers: allUsers
+      filteredUsers: allUsers,
+      selectedUser: null
     };
   }
 
@@ -26,12 +27,19 @@ class App extends React.Component {
     return allUsers.filter(user => user.toLowerCase().includes(text.toLowerCase()))
   }
 
+  onUserSelected = (selectedUser) => {
+    this.setState({
+      selectedUser
+    });
+  }
+
   render() {
     return (
-      <div>
-        <input onInput={this.filterUsers} />
-        <UsersList users={this.state.filteredUsers} />
-      </div>
+        <div>
+            <input onInput={this.filterUsers} />
+            <UsersList userSelected={this.onUserSelected} users={this.state.filteredUsers} />
+            <p>Selected User is: {this.state.selectedUser}</p>
+        </div>
     );
   }
 };
