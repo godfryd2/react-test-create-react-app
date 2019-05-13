@@ -32,3 +32,14 @@ describe('list of users', () => {
         });
     });
 });
+
+describe('list of users', () => {
+    const users = ['Michal', 'Ania'];
+    const usersList = shallow(<UsersList users={users} />);
+    
+    users.forEach(user => {
+        it(`includes name ${user} on the list`, () => {
+            expect(usersList.containsMatchingElement(<li>{user}</li>)).toEqual(true)
+        });
+    });
+});
