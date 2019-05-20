@@ -1,17 +1,15 @@
 import * as React from 'react';
 
-const UsersList = ({ users, userSelected }) => {
-  if (users.length > 0) {
+export const ContactItem = ({ avatarUrl, name, phone }) => {
     return (
-      <ul>
-        {users.map(user => <li onClick={userSelected.bind(null, user)} key={user}>{user}</li>)}
-      </ul>
+      <li className="item">
+        <img src={avatarUrl} className="ui mini rounded image" alt="" />
+        <div className="content">
+          <h4 className="header">{name}</h4>
+          <div className="description">{phone}</div>
+        </div>
+      </li>
     );
-  }
-
-  return (
-    <p>No results!</p>
-  );
 };
 
 export default UsersList;
