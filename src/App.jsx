@@ -4,24 +4,51 @@ import { AppHeader } from "./AppHeader";
 
 export class App extends React.Component {
   state = {
-    contacts: null
+    name: '',
+    color: 'blue',
+    message: '',
+    isChecked: true,
   };
 
-  componentDidMount() {
-    fetch("https://randomuser.me/api/?format=json&results=10")
-      .then(res => res.json())
-      .then(json => this.setState({ contacts: json.results }));
+  handleNameChange = (e) => {
+    this.setState({
+      name: e.target.value
+    });
+    console.log("e.target: " + e.target.value);
+  }
+  handleColorChange = (e) => {
+    this.setState({
+      color: e.target.value
+    });
+  }
+  handleMessageChange = (e) => {
+    this.setState({
+      message: e.target.value
+    });
+  }
+  handleCheckboxChange = (e) => {
+    this.setState({
+      isChecked: e.target.checked
+    });
   }
 
   render() {
-    const contacts = this.state.contacts;
-
     return (
       <div>
-        <AppHeader />
-        <main className="ui main text container">
-          {contacts ? <ContactsList contacts={contacts} /> : 'Ładowanie...'}
-        </main>
+        <input value={this.state.name} onChange={this.handleNameChange} /><br />
+        {this.state.name}<br />
+        <select value={this.state.color} onChange={this.handleColorChange}>
+          <option value="red">Czerwony</option>
+          <option value="blue">Niebieski</option>
+          <option value="green">Zielony</option>
+        </select><br />
+        {this.state.color}<br />
+        <textarea value={this.state.message} onChange={this.handleMessageChange} /><br />
+        {this.state.message}<br />
+        <label>
+          <input type="checkbox" checked={this.state.isChecked} onChange={this.handleCheckboxChange} />
+        </label>
+        {this.state.isChecked}<br />
       </div>
     );
   }
